@@ -1,0 +1,50 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.instructions-text-container {
+    inline-size: 50vw;
+    overflow-wrap: break-word;
+  }
+
+.row-container {
+    @apply h-16 sm:h-16 md:h-24 my-2;
+    display: flex;
+}
+
+.letter-slot {
+    box-sizing: border-box;
+    caret-color: transparent;
+    @apply
+    w-full
+    h-full
+    text-center
+    text-3xl
+    font-bold
+    transition-colors
+    duration-200
+    sm:w-16
+    sm:h-16
+    md:w-24
+    md:h-24
+    rounded-none
+    mx-1;
+}
+
+.letter-slot:focus {
+    text-align: center;
+    -webkit-transform:scale(1.1);
+    -moz-transform:scale(1.1);
+    -o-transform:scale(1.1);
+    transform:scale(1.1);
+    @apply
+    text-4xl
+}
+
+.letter-slot[data-color="nothing"] {
+    border-color: rgb(58, 58, 60);
+    border-width: 2px;
+}
