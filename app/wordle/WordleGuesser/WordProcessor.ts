@@ -1,4 +1,4 @@
-import { Position, Color } from './Position';
+import { Color, Position } from './Position';
 
 export const trimWords = (position: Position, calculatedWordList: string[]): string[] => {//There are probably tons of improvements for this (especially with yellows)
     if (position.Letter !== '') {
@@ -13,6 +13,7 @@ export const trimWords = (position: Position, calculatedWordList: string[]): str
                 return calculatedWordList;
         }
     }
+
     return calculatedWordList;
 }
 

@@ -11,7 +11,7 @@
   }
 
 .row-container {
-    @apply h-16 sm:h-16 md:h-24 my-2;
+    @apply h-16 sm:h-16 md:h-24 my-1;
     display: flex;
 }
 
@@ -31,7 +31,7 @@
     md:w-24
     md:h-24
     rounded-none
-    mx-1;
+    mx-0.5;
 }
 
 .letter-slot:focus {
@@ -46,5 +46,5 @@
 
 .letter-slot[data-color="nothing"] {
     border-color: rgb(58, 58, 60);
-    border-width: 2px;
+    border-width: .1px;
 }

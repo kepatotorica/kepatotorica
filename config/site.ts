@@ -13,8 +13,13 @@ export const siteConfig = {
       href: "/wordle",
     },
     {
-      label: "Retirement",
+      label: "Retirement Calc",
       href: "/retirement",
+    },
+    {
+      label: "Insurance Calc",
+      href: "/insurance"
+
     }
     // {
     //   label: "Docs",

@@ -162,22 +162,6 @@ class WordleGuesser extends React.Component<any, MyState> {
   render() {
     return (
       <div>
-        <div className="button-container">
-          <Popover backdrop="blur" placement="bottom">
-            <PopoverTrigger>
-              <Button color="default">Instructions</Button>
-            </PopoverTrigger>
-            <PopoverContent>
-              <div className="instructions-text-container">
-                Fill out your letters how they appear on your wordle, then press
-                a cell to change its color. Then see valid words at the bottom
-                of the page. There is a known issue right now if there are
-                multiple of the same letter in a word. I have been too lazy to
-                fix this right now
-              </div>
-            </PopoverContent>
-          </Popover>
-        </div>
         <div>
           <div>
             {this.state.gridList.map((row, rowIndex) => {
@@ -203,12 +187,28 @@ class WordleGuesser extends React.Component<any, MyState> {
               );
             })}
           </div>
-          <Button
-            color="danger"
-            onClick={() => this.setState({ ...initialState })}
-          >
-            Reset Grid
-          </Button>
+          <div className="button-container">
+            <Popover backdrop="blur" placement="bottom">
+              <PopoverTrigger>
+                <Button color="default">Instructions</Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <div className="instructions-text-container">
+                  Fill out your letters how they appear on your wordle, then press
+                  a cell to change its color. Then see valid words at the bottom
+                  of the page. There is a known issue right now if there are
+                  multiple of the same letter in a word. I have been too lazy to
+                  fix this right now
+                </div>
+              </PopoverContent>
+            </Popover>
+            <Button
+              color="danger"
+              onClick={() => this.setState({ ...initialState })}
+            >
+              Reset Grid
+            </Button>
+          </div>
           <div className="wordListDiv">
             <p>{this.state.wordList.join(" ")}</p>
           </div>
