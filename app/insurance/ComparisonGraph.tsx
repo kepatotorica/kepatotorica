@@ -9,6 +9,7 @@ import CustomLineChart from '@/components/LineChart/CustomLineChart';
 
 interface Props {
     plans: InsurancePlan[]
+    visits: number
 }
 
 const costIncrements = Array.from({ length: 1000 }, (_, i) => i * 27);
@@ -22,7 +23,7 @@ const ComparisonGraph: React.FC<Props> = (props: Props) => {
                 data: costIncrements.map((cost) => {
                     return {
                         category: cost,
-                        value: calculateInsuranceCost(plan, 20, cost)
+                        value: calculateInsuranceCost(plan, props.visits, cost)
                     }
                 })
             }

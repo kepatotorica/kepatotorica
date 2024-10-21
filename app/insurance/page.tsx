@@ -8,6 +8,7 @@ import AddInsurancePlan from './AddInsurancePlan';
 import ComparisonGraph from './ComparisonGraph';
 
 export default function InsuranceCalculator() {
+  const [visits, setVisits] = useState<number>(1);
   const [plans, setPlans] = useState<InsurancePlan[]>([
     {
       name: "High Deductible",
@@ -48,14 +49,13 @@ export default function InsuranceCalculator() {
 
   return (
     <div>
-      <div>
-        Use this to help decide your insurance plan if you have a rough idea of
-        what you will be using for your plan
+      <div className='text-2xl p-10 text-center'>
+        A very simplified calculator to see how much you might pay with insurance plans.
       </div>
 
       <AddInsurancePlan onAdd={addPlan} />
       <InsurancePlanList className="text-orange-400" plans={plans} onRemove={removePlan} />
-      <ComparisonGraph plans={plans} />
+      <ComparisonGraph plans={plans} visits={visits} />
     </div>
   );
 }

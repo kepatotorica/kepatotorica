@@ -1,7 +1,9 @@
 "use client"
-import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from "recharts";
+import { ResponsiveContainer, LineChart, XAxis, YAxis, Tooltip, Legend, Line } from "recharts";
 
 import { LineChartData } from "./LineChartData";
+
+import { getRandomColor } from "@/Utilities/helpers";
 
 
 interface Props {
@@ -23,14 +25,21 @@ export default function CustomLineChart(props: Props) {
             {props.data &&
                 <ResponsiveContainer height="100%" width="100%">
                     <LineChart height={300} width={500}>
-                        <CartesianGrid strokeDasharray="3 3" />
+                        {/* <CartesianGrid strokeDasharray="3 3" /> */}
                         <XAxis allowDuplicatedCategory={false} dataKey="category" type="category" />
                         <YAxis dataKey="value" />
                         <Tooltip content={<CustomTooltip />} />
                         <Legend />
                         {props.data.map((point, index) => (
-                            <Line key={point.name} color="36cc23" data={point.data} dataKey="value" name={point.name} />
-                            // <Line key={point.name} color={index < colors.length ? colors[index] : getRandomColor()} data={point.data} dataKey="value" name={point.name} />
+                            // <Line key={point.name} color="0000" data={point.data} dataKey="value" name={point.name} />
+                            <Line
+                                key={point.name}
+                                color={index < colors.length ? colors[index] : getRandomColor()}
+                                data={point.data}
+                                dataKey="value"
+                                // isAnimationActive={true}
+                                name={point.name}
+                            />
                         ))}
                     </LineChart>
                 </ResponsiveContainer>
@@ -65,13 +74,13 @@ function CustomTooltip({ payload: mouseInfo, label, active }: any) {
         return (
             <div>
                 <div className="flex justify-between items-center">
-                    <span>Total Cost:</span>
-                    <span>${label}</span>
+                    <span className="text-sm">Cost: </span>
+                    <span className="text-sm">${label}</span>
                 </div>
                 {mouseInfo.map((info: ToolTipPayload) => {
                     return <div key={info.name + info.payload.category} className="flex justify-between items-center">
-                        <span>{`${info.name}: `}</span>
-                        <span>${info.payload.value}</span>
+                        <span className="text-sm">{`${info.name}: `}</span>
+                        <span className="text-sm">${info.payload.value}</span>
                     </div>
                 })}
             </div>

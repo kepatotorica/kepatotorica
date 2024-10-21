@@ -9,10 +9,10 @@ interface Props {
 }
 
 const InsurancePlanList: React.FC<Props> = (props: Props) => (
-    <div>
-        <h2>Insurance Plans</h2>
+    <div className='mt-10'>
+        <h1 className='text-center text-3xl text-orange-400'>Insurance Plans</h1>
         {props.plans.map((plan, index) => (
-            <Card key={index} >
+            <Card key={index} className='mb-10 mt-5'>
                 <CardBody>
                     <div className="flex justify-between items-center">
                         <div>
