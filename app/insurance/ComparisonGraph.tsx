@@ -31,7 +31,7 @@ const ComparisonGraph: React.FC<Props> = (props: Props) => {
         setData(calculatedData)
     }, [props.plans]);
 
-    return data && <CustomLineChart data={data} />
+    return data ? < CustomLineChart data={data} /> : <></>
 };
 
 export default ComparisonGraph;
