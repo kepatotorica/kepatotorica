@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react';
+import { Spacer } from '@nextui-org/react';
 
 import { InsurancePlan } from './InsurancePlan';
 import InsurancePlanList from './InsurancePlanList';
@@ -56,6 +57,7 @@ export default function InsuranceCalculator() {
       <AddInsurancePlan onAdd={addPlan} />
       <InsurancePlanList className="text-orange-400" plans={plans} onRemove={removePlan} />
       <ComparisonGraph plans={plans} visits={visits} />
+      <Spacer y={96} />
     </div>
   );
 }

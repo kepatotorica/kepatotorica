@@ -1,0 +1,136 @@
+import { Contribution, ContributionFrequency, contributionType as ContributionType } from "./Contribution";
+
+export const fakeContributions: Contribution[] = [
+    {
+      name: "payPerMonthKepa",
+      amount: 2503.53,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.CheckIncome,
+    },
+    {
+      name: "payPerMonthFitri",
+      amount: 2471.12,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.CheckIncome,
+    },
+    {
+      name: "gekelerRental",
+      amount: 1800,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.CheckIncome,
+    },
+    {
+      name: "SoFiAutoInvest",
+      amount: 6500,
+      frequency: ContributionFrequency.Annually,
+      type: ContributionType.PostTaxInvestment,
+    },
+    {
+      name: "m1FinaceIndividual",
+      amount: 6500,
+      frequency: ContributionFrequency.Annually,
+      type: ContributionType.PostTaxInvestment,
+    },
+    {
+      name: "Kepa 401k",
+      amount: 724.04 + 193.08,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.PreTaxInvestment,
+    },
+    {
+      name: "Fitri 401k",
+      amount: 346.15 + 169.23,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.PreTaxInvestment,
+    },
+    {
+      name: "Kepa espp",
+      amount: 1045.82,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.EmployeeStock,
+    },
+    {
+      name: "Fitri espp",
+      amount: 916,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.EmployeeStock,
+    },
+    {
+      name: "Kepa RSU",
+      amount: (45000 + 55000) / 2,
+      frequency: ContributionFrequency.Annually,
+      type: ContributionType.EmployeeStock,
+    },
+    {
+      name: "Fitri RSU",
+      amount: (45000 + 45000) / 2,
+      frequency: ContributionFrequency.Annually,
+      type: ContributionType.EmployeeStock,
+    },
+    {
+      name: "mortgagePaymentGekeler",
+      amount: 851.95,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Housing,
+    },
+    {
+      name: "hoaGekeler",
+      amount: 311,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Housing,
+    },
+    {
+      name: "mortgagePaymentBendRidge",
+      amount: 3248.99,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Housing,
+    },
+    {
+      name: "hoaBendRidge",
+      amount: 57,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Housing,
+    },
+    {
+      name: "youtubePremium",
+      amount: 18,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Bill,
+    },
+    {
+      name: "internet",
+      amount: 60,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Bill,
+    },
+    {
+      name: "WaterPayment",
+      amount: 75,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Bill,
+    },
+    {
+      name: "IdahoPowerAverage",
+      amount: 16,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Bill,
+    },
+    {
+      name: "intermountainGas",
+      amount: 40,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Bill,
+    },
+    {
+      name: "statefarm",
+      amount: 90,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Bill,
+    },
+    {
+      name: "food",
+      amount: 600,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.Food,
+    },
+  ];
