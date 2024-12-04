@@ -7,7 +7,7 @@ import { Contribution } from "./Contribution";
 import ContributionTable from "./ContributionTable";
 import ContributionEditor from "./ContributionEditor";
 import { fakeContributions } from "./FakeContributions";
-import { ContributionsMonthlySummary } from "./ContributionsMonthlySummary";
+import { ContributionSummary } from "./ContributionSummary";
 
 export default function RetirementCalculatorPage() {
   const [contributions, setContributions] = useState<Contribution[]>(fakeContributions)
@@ -21,7 +21,7 @@ export default function RetirementCalculatorPage() {
       className="text-orange-400"
       contributions={contributions} onRemove={removePlan}
     />
-    <ContributionsMonthlySummary contributions={contributions} />
+    <ContributionSummary contributions={contributions} />
     <Spacer y={96} />
   </>;
 }

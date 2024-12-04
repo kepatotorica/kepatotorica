@@ -16,6 +16,7 @@ export enum ContributionFrequency {
 
 export enum contributionType {
   CheckIncome = "Check Income",
+  OtherIncome = "Other Income",
   PreTaxInvestment = "Pre-Tax",
   PostTaxInvestment = "Post-Tax",
   Bill = "Bills",
@@ -24,26 +25,18 @@ export enum contributionType {
   Food = "Food",
 }
 
-export const weeklyToMonthly = (weeklyPayment: number): number => {
-  return (weeklyPayment * 52) / 12;
-}
-
-export const biWeeklyToMonthly = (biWeeklyPayment: number): number => {
-  return (biWeeklyPayment * 26) / 12;
-}
-
 export const contributionToMonthlyAmount = (contribution: Contribution): number => {
   switch (contribution.frequency) {
     case ContributionFrequency.Daily:
       return contribution.amount * 30; // Assuming 30 days in a month for simplicity
     case ContributionFrequency.Weekly:
-      return weeklyToMonthly(contribution.amount);
+      return (contribution.amount * 52) / 12;
     case ContributionFrequency.Biweekly:
-      return biWeeklyToMonthly(contribution.amount);
+      return (contribution.amount * 26) / 12;
     case ContributionFrequency.Monthly:
       return contribution.amount;
     case ContributionFrequency.Quarterly:
-      return contribution.amount / 3;
+      return contribution.amount / 4;
     case ContributionFrequency.Annually:
       return contribution.amount / 12;
     default:
@@ -58,7 +51,7 @@ export const getPostTaxMonthlyIncome = (contributions: Contribution[]): number =
     let contribution = contributions[i];
 
     if (
-      contribution.type === contributionType.CheckIncome
+      contribution.type === contributionType.CheckIncome || contribution.type === contributionType.OtherIncome
     ) {
       postTaxIncome += contributionToMonthlyAmount(contribution);
     }
@@ -67,30 +60,25 @@ export const getPostTaxMonthlyIncome = (contributions: Contribution[]): number =
   return postTaxIncome;
 }
 
-export const getMMonthlySpending = (contributions: Contribution[]): number => {
-  let spendingMoney = 0;
+export const getLeftOver = (contributions: Contribution[]): number => {
+  let leftoverCash = getPostTaxMonthlyIncome(contributions)
 
   for (let i = 0; i < contributions.length; i++) {
     let contribution = contributions[i];
     const monthlyAmount = contributionToMonthlyAmount(contribution);
 
     switch (contribution.type) {
-      case contributionType.EmployeeStock:
-      case contributionType.PreTaxInvestment:
-        break;
-      case contributionType.PostTaxInvestment:
-        spendingMoney -= monthlyAmount;
-        break;
       case contributionType.Bill:
-        spendingMoney -= monthlyAmount;
-        break;
+      case contributionType.PostTaxInvestment:
+      case contributionType.Housing:
+      case contributionType.Food:
+        leftoverCash -= monthlyAmount;
       default:
-        spendingMoney += monthlyAmount;
-        break;
+        break
     }
   }
 
-  return spendingMoney;
+  return leftoverCash;
 }
 
 export const getMonthlyInvested = (contributions: Contribution[]): number => {

@@ -1,136 +1,126 @@
 import { Contribution, ContributionFrequency, contributionType as ContributionType } from "./Contribution";
 
+const myCheck = 2603
+const spouseCheck = 2697
+
 export const fakeContributions: Contribution[] = [
     {
-      name: "payPerMonthKepa",
-      amount: 2503.53,
+      name: "Pay 1", //"payPerMonthKepa",
+      amount: myCheck,
       frequency: ContributionFrequency.Biweekly,
       type: ContributionType.CheckIncome,
     },
     {
-      name: "payPerMonthFitri",
-      amount: 2471.12,
+      name: "Pay2", //"payPerMonthFitri",
+      amount: spouseCheck,
       frequency: ContributionFrequency.Biweekly,
       type: ContributionType.CheckIncome,
     },
-    {
-      name: "gekelerRental",
-      amount: 1800,
+    { name: 'Mortgage 1', //6610
+       amount: 3272,
       frequency: ContributionFrequency.Monthly,
-      type: ContributionType.CheckIncome,
-    },
+      type: ContributionType.Housing,
+     },
     {
-      name: "SoFiAutoInvest",
-      amount: 6500,
+      name: 'HOA 1', //6610
+      amount: 430 * 2,
       frequency: ContributionFrequency.Annually,
-      type: ContributionType.PostTaxInvestment,
-    },
-    {
-      name: "m1FinaceIndividual",
-      amount: 6500,
-      frequency: ContributionFrequency.Annually,
-      type: ContributionType.PostTaxInvestment,
-    },
-    {
-      name: "Kepa 401k",
-      amount: 724.04 + 193.08,
-      frequency: ContributionFrequency.Biweekly,
-      type: ContributionType.PreTaxInvestment,
-    },
-    {
-      name: "Fitri 401k",
-      amount: 346.15 + 169.23,
-      frequency: ContributionFrequency.Biweekly,
-      type: ContributionType.PreTaxInvestment,
-    },
-    {
-      name: "Kepa espp",
-      amount: 1045.82,
-      frequency: ContributionFrequency.Monthly,
-      type: ContributionType.EmployeeStock,
-    },
-    {
-      name: "Fitri espp",
-      amount: 916,
-      frequency: ContributionFrequency.Monthly,
-      type: ContributionType.EmployeeStock,
-    },
-    {
-      name: "Kepa RSU",
-      amount: (45000 + 55000) / 2,
-      frequency: ContributionFrequency.Annually,
-      type: ContributionType.EmployeeStock,
-    },
-    {
-      name: "Fitri RSU",
-      amount: (45000 + 45000) / 2,
-      frequency: ContributionFrequency.Annually,
-      type: ContributionType.EmployeeStock,
-    },
-    {
-      name: "mortgagePaymentGekeler",
-      amount: 851.95,
-      frequency: ContributionFrequency.Monthly,
       type: ContributionType.Housing,
     },
     {
-      name: "hoaGekeler",
-      amount: 311,
+      name: 'Mortgage 2', //Gekeler
+      amount: 1038,
       frequency: ContributionFrequency.Monthly,
       type: ContributionType.Housing,
     },
-    {
-      name: "mortgagePaymentBendRidge",
-      amount: 3248.99,
+    { name: 'HOA 2', //Gekeler
+      amount: 334,
       frequency: ContributionFrequency.Monthly,
-      type: ContributionType.Housing,
+      type: ContributionType.Housing
     },
     {
-      name: "hoaBendRidge",
-      amount: 57,
+      name: "Rental",
+      amount: 1500,
       frequency: ContributionFrequency.Monthly,
-      type: ContributionType.Housing,
+      type: ContributionType.OtherIncome,
     },
     {
-      name: "youtubePremium",
-      amount: 18,
-      frequency: ContributionFrequency.Monthly,
-      type: ContributionType.Bill,
-    },
-    {
-      name: "internet",
-      amount: 60,
+      name: 'Internet',
+      amount: 65,
       frequency: ContributionFrequency.Monthly,
       type: ContributionType.Bill,
     },
     {
-      name: "WaterPayment",
-      amount: 75,
-      frequency: ContributionFrequency.Monthly,
-      type: ContributionType.Bill,
-    },
-    {
-      name: "IdahoPowerAverage",
-      amount: 16,
-      frequency: ContributionFrequency.Monthly,
-      type: ContributionType.Bill,
-    },
-    {
-      name: "intermountainGas",
-      amount: 40,
-      frequency: ContributionFrequency.Monthly,
-      type: ContributionType.Bill,
-    },
-    {
-      name: "statefarm",
+      name: 'Insurance',
       amount: 90,
       frequency: ContributionFrequency.Monthly,
       type: ContributionType.Bill,
     },
     {
-      name: "food",
-      amount: 600,
+      name: 'Misc Spending',
+      amount: 250,
       frequency: ContributionFrequency.Monthly,
-      type: ContributionType.Food,
+      type: ContributionType.Bill,
+    },
+    {
+      name: 'General Investments',
+      amount: 2000,
+      frequency: ContributionFrequency.Monthly,
+      type: ContributionType.PostTaxInvestment,
+    },
+
+    {
+      name: 'Traditional IRA',
+      amount: 14000, //7k each for roth ira backdoor
+      frequency: ContributionFrequency.Annually,
+      type: ContributionType.PostTaxInvestment,
+    },
+    {
+      name: 'My 401k',
+      amount: 807.92,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.PreTaxInvestment,
+    },
+    {
+      name: 'My HSA',
+      amount: 155.7,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.PreTaxInvestment,
+    },
+    {
+      name: 'Spouse 401k',
+      amount: 494.16,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.PreTaxInvestment,
+    },
+    {
+      name: 'Spouse HSA',
+      amount: 122.91,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.PreTaxInvestment,
+    },
+    {
+      name: 'My ESPP',
+      amount: myCheck * 0.1,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.EmployeeStock,
+    },
+    {
+      name: 'Spouse ESPP',
+      amount: spouseCheck * 0.1,
+      frequency: ContributionFrequency.Biweekly,
+      type: ContributionType.EmployeeStock,
+    },
+    {
+      name: 'My RSU',
+      amount: (((45 + 55 + 45 + 51) * 1000 ) / 4) *.66 * .6, //30% drop in stock price, 30% to taxes
+      frequency: ContributionFrequency.Annually,
+      type: ContributionType.EmployeeStock,
+    },
+    {
+      name: 'Spouse RSU',
+      amount: (((40 + 45 + 40 + 31) * 1000) / 4) *.66 * .6, //30% drop in stock price, 30% to taxes
+      frequency: ContributionFrequency.Annually,
+      type: ContributionType.EmployeeStock,
     },
   ];
