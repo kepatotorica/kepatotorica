@@ -36,7 +36,7 @@ export const ContributionSummary: React.FC<Props> = (props: Props) => {
                         <span className="text-lg">{formatMoney(dailyInvested)}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-lg font-medium">Free Cash Over:</span>
+                        <span className="text-lg font-medium">Left Over Cash:</span>
                         <span className="text-lg">{formatMoney(dailyLeftOver)}</span>
                     </div>
                 </CardBody>
@@ -57,7 +57,7 @@ export const ContributionSummary: React.FC<Props> = (props: Props) => {
                         <span className="text-lg">{formatMoney(monthlyInvested)}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-lg font-medium">Free Cash Over:</span>
+                        <span className="text-lg font-medium">Left Over Cash:</span>
                         <span className="text-lg">{formatMoney(monthlyLeftOver)}</span>
                     </div>
                 </CardBody></Card>
@@ -77,7 +77,7 @@ export const ContributionSummary: React.FC<Props> = (props: Props) => {
                         <span className="text-lg">{formatMoney(yearlyInvested)}</span>
                     </div>
                     <div className="flex justify-between">
-                        <span className="text-lg font-medium">Free Cash Over:</span>
+                        <span className="text-lg font-medium">Left Over Cash:</span>
                         <span className="text-lg">{formatMoney(yearlyLeftOver)}</span>
                     </div>
                 </CardBody>
