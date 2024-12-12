@@ -34,11 +34,12 @@ export default function CustomLineChart(props: Props) {
                             // <Line key={point.name} color="0000" data={point.data} dataKey="value" name={point.name} />
                             <Line
                                 key={point.name}
-                                color={index < colors.length ? colors[index] : getRandomColor()}
                                 data={point.data}
                                 dataKey="value"
-                                // isAnimationActive={true}
+                                dot={false}
+                                isAnimationActive={true}
                                 name={point.name}
+                                stroke={index < colors.length ? colors[index] : getRandomColor()}
                             />
                         ))}
                     </LineChart>
@@ -79,7 +80,7 @@ function CustomTooltip({ payload: mouseInfo, label, active }: any) {
                 </div>
                 {mouseInfo.map((info: ToolTipPayload) => {
                     return <div key={info.name + info.payload.category} className="flex justify-between items-center">
-                        <span className="text-sm">{`${info.name}: `}</span>
+                        <span className={`text-sm`} style={{ color: info.color }}>{`${info.name}: `}</span>
                         <span className="text-sm">${info.payload.value}</span>
                     </div>
                 })}
