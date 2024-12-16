@@ -20,6 +20,10 @@ export const siteConfig = {
       label: "Insurance Calc",
       href: "/insurance"
 
+    },
+    {
+      label: "Account",
+      href: "account"
     }
     // {
     //   label: "Docs",

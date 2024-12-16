@@ -3,7 +3,7 @@ import { title } from "@/components/primitives";
 export default function AboutPage() {
   return (
     <div>
-      <h1 className={title()}>A collection of tools made by <span className={title({ color: "violet" })}>Kepa Totorica</span> for easy online access at any time</h1>
+      <h1 className={title()}>A collection of tools made by <span className={"text-orange-400"}>Kepa Totorica</span> for easy online access at any time</h1>
       {/* Hi! My name is Kepa Totorica I love to develop software and play games.
         This is a collection of tools I wrote that I wanted easy access too. Originally most of these apps were just console
         applications on my local computer, but I got tired of not having access to them anywhere so figured it was time to port them to an offical website.
