@@ -16,7 +16,7 @@ import { useState } from "react";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, Logo } from "@/components/icons";
+import { GithubIcon, Logo, UserIcon } from "@/components/icons";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,6 +55,9 @@ export const Navbar = () => {
           <GithubIcon className="text-default-500" />
         </Link>
         <ThemeSwitch />
+        <Link aria-label="Account" href={"/account"}>
+          <UserIcon className="text-default-500" />
+        </Link>
         <NavbarMenuToggle onClick={(_) => setIsMenuOpen(!isMenuOpen)} />
       </NavbarContent>
 

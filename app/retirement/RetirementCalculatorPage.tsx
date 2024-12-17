@@ -44,7 +44,6 @@ export default function RetirementCalculatorPage() {
         </span>
         :
         <Link
-          isExternal
           className={button({
             variant: "shadow",
             // radius: "full",

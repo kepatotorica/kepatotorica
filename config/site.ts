@@ -20,19 +20,7 @@ export const siteConfig = {
       label: "Insurance Calc",
       href: "/insurance"
 
-    },
-    {
-      label: "Account",
-      href: "account"
     }
-    // {
-    //   label: "Docs",
-    //   href: "/docs",
-    // },
-    // {
-    //   label: "About",
-    //   href: "/about",
-    // },
   ],
   links: {
     github: "https://github.com/kepatotorica",
