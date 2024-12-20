@@ -1,26 +1,24 @@
 'use client'
-import { button } from "@nextui-org/theme";
-import { useEffect, useState } from "react";
-import { Link, Spacer } from "@nextui-org/react";
-import { useAtom } from "jotai";
+import { button } from "@nextui-org/theme"
+import { useEffect, useState } from "react"
+import { Link, Spacer } from "@nextui-org/react"
 
-import { sessionAtom } from "../atoms/sessionAtom";
+import { usePocketBase } from "../state/usePocketBase"
 
-import { Contribution } from "./Contribution";
-import ContributionTable from "./ContributionTable";
-import ContributionEditor from "./ContributionEditor";
-import { fakeContributions } from "./FakeContributions";
-import { ContributionSummary } from "./ContributionSummary";
-
+import { Contribution } from "./Contribution"
+import ContributionTable from "./ContributionTable"
+import ContributionEditor from "./ContributionEditor"
+import { fakeContributions } from "./FakeContributions"
+import { ContributionSummary } from "./ContributionSummary"
 
 
 export default function RetirementCalculatorPage() {
-  const [session, setSession] = useAtom(sessionAtom); //TODOASDF this doesn't seem to work (might just be live reload), it sometimes invalidates. Supabase may have a more elegant way to share this state.
+  const pb = usePocketBase()
 
   const [contributions, setContributions] = useState<Contribution[]>([])
 
   useEffect(() => {
-    if (session?.user.email === "kepatoto@gmail.com") {
+    if (pb.authStore?.record?.email === "kepatoto@gmail.com") {
       const ourContributions = fakeContributions
         .map(contribution => {
           return {
@@ -31,16 +29,16 @@ export default function RetirementCalculatorPage() {
 
       setContributions(ourContributions)
     }
-  }, [session])
+  }, [pb.authStore])
 
-  const addContribution = (contribution: Contribution) => setContributions(prevContributions => [...prevContributions, contribution]);
-  const removePlan = (index: number) => setContributions(contributions.filter((_, i) => i !== index));
+  const addContribution = (contribution: Contribution) => setContributions(prevContributions => [...prevContributions, contribution])
+  const removePlan = (index: number) => setContributions(contributions.filter((_, i) => i !== index))
 
   return <>
     <div className="pb-8 text-center justify-center">
-      {session ?
+      {pb.authStore && pb.authStore.record ?
         <span className="text-3xl"> Info Saved for:{" "}
-          <span className={"text-orange-400"}>{session?.user.email}</span>
+          <span className={"text-orange-400"}>{pb.authStore.record.email}</span>
         </span>
         :
         <Link
@@ -62,5 +60,5 @@ export default function RetirementCalculatorPage() {
     />
     <ContributionSummary contributions={contributions} />
     <Spacer y={96} />
-  </>;
+  </>
 }

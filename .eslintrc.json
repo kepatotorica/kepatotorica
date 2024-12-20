@@ -71,8 +71,7 @@
             "group": "external",
             "position": "after"
           }
-        ],
-        "newlines-between": "always"
+        ]
       }
     ],
     "react/self-closing-comp": "warn",
@@ -85,35 +84,9 @@
         "reservedFirst": true
       }
     ],
-    "padding-line-between-statements": [
+    "semi": [
       "warn",
-      {
-        "blankLine": "always",
-        "prev": "*",
-        "next": "return"
-      },
-      {
-        "blankLine": "always",
-        "prev": [
-          "const",
-          "let",
-          "var"
-        ],
-        "next": "*"
-      },
-      {
-        "blankLine": "any",
-        "prev": [
-          "const",
-          "let",
-          "var"
-        ],
-        "next": [
-          "const",
-          "let",
-          "var"
-        ]
-      }
+      "never"
     ]
   }
 }

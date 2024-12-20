@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { ResponsiveContainer, LineChart, XAxis, YAxis, Tooltip, Legend, Line } from "recharts";
 
 import { LineChartData } from "./LineChartData";
@@ -17,7 +17,7 @@ const colors = [
     "#bb23cc",
     "#36cc23",
     "#2353cc",
-]
+];
 
 export default function CustomLineChart(props: Props) {
     return (
@@ -82,7 +82,7 @@ function CustomTooltip({ payload: mouseInfo, label, active }: any) {
                     return <div key={info.name + info.payload.category} className="flex justify-between items-center">
                         <span className={`text-sm`} style={{ color: info.color }}>{`${info.name}: `}</span>
                         <span className="text-sm">${info.payload.value}</span>
-                    </div>
+                    </div>;
                 })}
             </div>
         );
