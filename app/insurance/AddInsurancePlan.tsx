@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import {
     Card,
     CardHeader,
@@ -7,9 +7,9 @@ import {
     Button,
     Input,
     Spacer,
-} from '@nextui-org/react';
+} from '@nextui-org/react'
 
-import { InsurancePlan } from './InsurancePlan';
+import { InsurancePlan } from './InsurancePlan'
 
 interface Props {
     onAdd: (plan: InsurancePlan) => void;
@@ -24,17 +24,17 @@ const AddInsurancePlan: React.FC<Props> = (props: Props) => {
         coinsurance: 0,
         companyHsaContribution: 0,
         copayPerVisit: 0,
-    });
+    })
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNewPlan({
             ...newPlan,
             [event.target.name]: parseFloat(event.target.value),
-        });
-    };
+        })
+    }
 
     const addPlan = () => {
-        props.onAdd(newPlan);
+        props.onAdd(newPlan)
         setNewPlan({
             name: "",
             pricePerMonth: 0,
@@ -43,8 +43,8 @@ const AddInsurancePlan: React.FC<Props> = (props: Props) => {
             coinsurance: 0,
             companyHsaContribution: 0,
             copayPerVisit: 0,
-        });
-    };
+        })
+    }
 
     return (
         <Card>
@@ -114,7 +114,7 @@ const AddInsurancePlan: React.FC<Props> = (props: Props) => {
                 </Button>
             </CardFooter>
         </Card>
-    );
-};
+    )
+}
 
-export default AddInsurancePlan;
+export default AddInsurancePlan

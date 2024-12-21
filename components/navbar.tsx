@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -7,19 +7,19 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
-import { link as linkStyles } from "@nextui-org/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
-import { useState } from "react";
+} from "@nextui-org/navbar"
+import { Link } from "@nextui-org/link"
+import { link as linkStyles } from "@nextui-org/theme"
+import NextLink from "next/link"
+import clsx from "clsx"
+import { useState } from "react"
 
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, Logo, UserIcon } from "@/components/icons";
+import { siteConfig } from "@/config/site"
+import { ThemeSwitch } from "@/components/theme-switch"
+import { GithubIcon, Logo, UserIcon } from "@/components/icons"
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <NextUINavbar isMenuOpen={isMenuOpen} maxWidth="xl" position="sticky">
@@ -58,7 +58,7 @@ export const Navbar = () => {
         <Link aria-label="Account" href={"/account"}>
           <UserIcon className="text-default-500" />
         </Link>
-        <NavbarMenuToggle onClick={(_) => setIsMenuOpen(!isMenuOpen)} />
+        <NavbarMenuToggle onPress={(_) => setIsMenuOpen(!isMenuOpen)} />
       </NavbarContent>
 
       <NavbarMenu>
@@ -69,7 +69,7 @@ export const Navbar = () => {
                 color="foreground"
                 href={item.href}
                 size="lg"
-                onClick={(_) => setIsMenuOpen(false)}
+                onPress={(_) => setIsMenuOpen(false)}
               >
                 {item.label}
               </Link>
@@ -78,5 +78,5 @@ export const Navbar = () => {
         </div>
       </NavbarMenu>
     </NextUINavbar>
-  );
-};
+  )
+}

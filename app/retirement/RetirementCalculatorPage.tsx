@@ -3,22 +3,27 @@ import { button } from "@nextui-org/theme"
 import { useEffect, useState } from "react"
 import { Link, Spacer } from "@nextui-org/react"
 
-import { usePocketBase } from "../state/usePocketBase"
+import PocketBase, { BaseAuthStore } from "pocketbase"
 
 import { Contribution } from "./Contribution"
 import ContributionTable from "./ContributionTable"
 import ContributionEditor from "./ContributionEditor"
 import { fakeContributions } from "./FakeContributions"
 import { ContributionSummary } from "./ContributionSummary"
-
+const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
 export default function RetirementCalculatorPage() {
-  const pb = usePocketBase()
+  const [authStore, setAuthStore] = useState<BaseAuthStore>()
+  const getAuth = async () => pb.authStore.isValid && pb.authStore.record && setAuthStore(authStore)
+  useEffect(() => {
+    getAuth()
+  }, [])
+
 
   const [contributions, setContributions] = useState<Contribution[]>([])
 
   useEffect(() => {
-    if (pb.authStore?.record?.email === "kepatoto@gmail.com") {
+    if (authStore?.record?.email === "kepatoto@gmail.com") {
       const ourContributions = fakeContributions
         .map(contribution => {
           return {
@@ -29,16 +34,16 @@ export default function RetirementCalculatorPage() {
 
       setContributions(ourContributions)
     }
-  }, [pb.authStore])
+  }, [authStore])
 
   const addContribution = (contribution: Contribution) => setContributions(prevContributions => [...prevContributions, contribution])
   const removePlan = (index: number) => setContributions(contributions.filter((_, i) => i !== index))
 
   return <>
     <div className="pb-8 text-center justify-center">
-      {pb.authStore && pb.authStore.record ?
+      {authStore && authStore.record ?
         <span className="text-3xl"> Info Saved for:{" "}
-          <span className={"text-orange-400"}>{pb.authStore.record.email}</span>
+          <span className={"text-orange-400"}>{authStore.record.email}</span>
         </span>
         :
         <Link
