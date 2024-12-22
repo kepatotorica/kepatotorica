@@ -49,11 +49,11 @@ export const Login = (props: Props) => {
     }
 
     return (
-        <>
+        <div className="lg:w-96 w-52">
             {errorMessage && <Alert color="danger">{errorMessage}</Alert>}
             <Input className='py-3' placeholder='username/email' onChange={e => setUsername(e.target.value)} />
-            <Input className='py-3' placeholder='password' onChange={e => setPassword(e.target.value)} />
+            <Input className='py-3' placeholder='password' type="password" onChange={e => setPassword(e.target.value)} onKeyUp={e => e.key === "Enter" && login()} />
             <Button className='my-1 w-[100%]' onClick={login}>{showSpinner ? <Spinner /> : "Login"}</Button >
-        </>
+        </div>
     )
 }
