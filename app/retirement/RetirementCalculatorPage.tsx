@@ -14,7 +14,7 @@ const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
 export default function RetirementCalculatorPage() {
   const [authStore, setAuthStore] = useState<BaseAuthStore>()
-  const getAuth = async () => pb.authStore.isValid && pb.authStore.record && setAuthStore(authStore)
+  const getAuth = async () => pb.authStore.isValid && pb.authStore.record && setAuthStore(pb.authStore)
   useEffect(() => {
     getAuth()
   }, [])

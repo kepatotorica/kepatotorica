@@ -1,15 +1,15 @@
 "use client"
 
-import { useState } from 'react';
-import { Spacer } from '@nextui-org/react';
+import { useState } from 'react'
+import { Spacer } from '@nextui-org/react'
 
-import { InsurancePlan } from './InsurancePlan';
-import InsurancePlanList from './InsurancePlanList';
-import AddInsurancePlan from './AddInsurancePlan';
-import ComparisonGraph from './ComparisonGraph';
+import { InsurancePlan } from './InsurancePlan'
+import InsurancePlanList from './InsurancePlanList'
+import AddInsurancePlan from './AddInsurancePlan'
+import ComparisonGraph from './ComparisonGraph'
 
 export default function InsuranceCalculator() {
-  const [visits, setVisits] = useState<number>(1);
+  const [visits, setVisits] = useState<number>(1)
   const [plans, setPlans] = useState<InsurancePlan[]>([
     {
       name: "High Deductible",
@@ -38,20 +38,20 @@ export default function InsuranceCalculator() {
       companyHsaContribution: 0,
       copayPerVisit: 30,
     },
-  ]);
+  ])
 
   const addPlan = (plan: InsurancePlan) => {
-    setPlans([...plans, plan]);
-  };
+    setPlans([...plans, plan])
+  }
 
   const removePlan = (index: number) => {
-    setPlans(plans.filter((_, i) => i !== index));
-  };
+    setPlans(plans.filter((_, i) => i !== index))
+  }
 
   return (
     <div>
       <div className='text-2xl p-10 text-center'>
-        A very simplified calculator to see how much you might pay with insurance plans.
+        A very simple calculator to see how much you might pay with insurance plans.
       </div>
 
       <AddInsurancePlan onAdd={addPlan} />
@@ -59,5 +59,5 @@ export default function InsuranceCalculator() {
       <ComparisonGraph plans={plans} visits={visits} />
       <Spacer y={96} />
     </div>
-  );
+  )
 }
