@@ -18,8 +18,7 @@ export const siteConfig = {
     },
     {
       label: "Insurance Calc",
-      href: "/insurance"
-
+      href: "/insurance",
     }
   ],
   links: {
@@ -29,4 +28,4 @@ export const siteConfig = {
     // discord: "https://discord.gg/9b6yyZKmH4",
     // sponsor: "https://patreon.com/jrgarciadev",
   },
-};
+}

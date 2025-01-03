@@ -6,22 +6,30 @@ import PocketBase, { BaseAuthStore } from "pocketbase"
 import { useEffect, useState } from "react"
 import { Link } from '@nextui-org/link'
 import { button } from '@nextui-org/theme'
-import { useTheme } from 'next-themes'
 import { Spinner } from "@nextui-org/spinner"
+import { useSearchParams } from "next/navigation"
+import { PasswordReset } from "./auth/PasswordReset"
 import { title } from '@/components/primitives'
-import { Login, LoginResponse } from '@/components/Login'
+import { Login, LoginResponse } from '@/app/account/auth/Login'
 
 
 const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
+enum actions {
+    login = 'login',
+    confirmPasswordReset = 'confirm-password-reset',
+}
+
 export default function AccountPage() {
     const [authStore, setAuthStore] = useState<BaseAuthStore>()
+    const searchParams = useSearchParams()
+
+    const actionParameter = searchParams.get('action')?.valueOf() || 'Login'
+    const token = searchParams.get('token') || ""
+
     const getAuth = async () => (pb.authStore.isValid && pb.authStore.record) && setAuthStore(pb.authStore)
 
     const [loading, setLoading] = useState<boolean>(true)
-    const [errorMessage, setErrorMessage] = useState<string>("")
-
-    const { theme } = useTheme()
 
     const onLogin = async (username: string, password: string): Promise<LoginResponse> => {
         const authData = await pb.collection("users").authWithPassword(username, password)
@@ -32,9 +40,19 @@ export default function AccountPage() {
         } else {
             return LoginResponse.INVALID_CREDENTIALS
         }
-
     }
 
+    const onForgotPassword = async (email: string) => {
+        await pb.collection('users').requestPasswordReset(email, {})
+    }
+
+    const onPasswordReset = async (password: string, confirmPassword: string) => {
+        await pb.collection('users').confirmPasswordReset(
+            token,
+            password,
+            confirmPassword,
+        )
+    }
 
     const signOut = async () => {
         pb.authStore.clear()
@@ -46,6 +64,19 @@ export default function AccountPage() {
         getAuth()
         setLoading(false)
     }, [])
+
+
+    const renderContent = () => {
+        switch (actionParameter) {
+            case actions.confirmPasswordReset:
+                return <PasswordReset onPasswordReset={onPasswordReset} />
+            default:
+                return <Login
+                    onForgotPassword={onForgotPassword}
+                    onLogin={onLogin}
+                />
+        }
+    }
 
     if (loading) return <Spinner />
     if (authStore && authStore.record) {
@@ -65,7 +96,7 @@ export default function AccountPage() {
                             radius: "full",
                             color: "primary",
                         })}
-                        onClick={signOut}
+                        onPress={signOut}
                     >
                         Sign Out
                     </Link>
@@ -74,8 +105,6 @@ export default function AccountPage() {
         </>
     }
     else {
-        return <Login
-            onLogin={onLogin}
-        />
+        return renderContent()
     }
 }
