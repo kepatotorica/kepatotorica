@@ -2,11 +2,11 @@
 const nextConfig = {
   async redirects() {
     return [
-      {
-        source: "/auth/:action/:token",
-        destination: "/account?action=:action&token=:token",
-        permanent: true,
-      },
+      //   {
+      //     source: "/auth/:action/:token",
+      //     destination: "/account?action=:action&token=:token",
+      //     permanent: true,
+      //   },
     ];
   },
 };

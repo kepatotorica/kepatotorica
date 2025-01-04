@@ -9,8 +9,8 @@ import { button } from '@nextui-org/theme'
 import { Spinner } from "@nextui-org/spinner"
 import { useSearchParams } from "next/navigation"
 import { PasswordReset } from "./auth/PasswordReset"
+import { Login, LoginResponse } from "./auth/Login"
 import { title } from '@/components/primitives'
-import { Login, LoginResponse } from '@/app/account/auth/Login'
 
 
 const pb = new PocketBase('https://kepatotorica.pockethost.io/')
