@@ -1,9 +1,6 @@
 "use client"
-// import { createClient } from '@supabase/supabase-js'
-// import { Auth } from "@supabase/auth-ui-react";
-// import { ThemeSupa } from "@supabase/auth-ui-shared";
 import PocketBase, { BaseAuthStore } from "pocketbase"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { Link } from '@nextui-org/link'
 import { button } from '@nextui-org/theme'
 import { Spinner } from "@nextui-org/spinner"
@@ -11,7 +8,6 @@ import { useSearchParams } from "next/navigation"
 import { PasswordReset } from "./auth/PasswordReset"
 import { Login, LoginResponse } from "./auth/Login"
 import { title } from '@/components/primitives'
-
 
 const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
@@ -105,6 +101,10 @@ export default function AccountPage() {
         </>
     }
     else {
-        return renderContent()
+        return (
+            <Suspense fallback={<Spinner />}>
+                {renderContent()}
+            </Suspense>
+        )
     }
 }
