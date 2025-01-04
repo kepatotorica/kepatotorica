@@ -1,27 +1,35 @@
 "use client"
+// import { createClient } from '@supabase/supabase-js'
+// import { Auth } from "@supabase/auth-ui-react";
+// import { ThemeSupa } from "@supabase/auth-ui-shared";
 import PocketBase, { BaseAuthStore } from "pocketbase"
-import { useEffect, useState, Suspense } from "react"
+import { useEffect, useState } from "react"
 import { Link } from '@nextui-org/link'
 import { button } from '@nextui-org/theme'
 import { Spinner } from "@nextui-org/spinner"
-import { useSearchParams } from "next/navigation"
+import { ReadonlyURLSearchParams } from "next/navigation"
 import { PasswordReset } from "./auth/PasswordReset"
 import { Login, LoginResponse } from "./auth/Login"
 import { title } from '@/components/primitives'
 
+
 const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
-enum actions {
+export enum actions {
     login = 'login',
     confirmPasswordReset = 'confirm-password-reset',
 }
 
-export default function AccountPage() {
-    const [authStore, setAuthStore] = useState<BaseAuthStore>()
-    const searchParams = useSearchParams()
 
-    const actionParameter = searchParams.get('action')?.valueOf() || 'Login'
-    const token = searchParams.get('token') || ""
+interface props {
+    searchParams: ReadonlyURLSearchParams
+}
+
+export default function AccountPage(props: props) {
+    const [authStore, setAuthStore] = useState<BaseAuthStore>()
+
+    const actionParameter = props.searchParams.get('action')?.valueOf() || 'Login'
+    const token = props.searchParams.get('token') || ""
 
     const getAuth = async () => (pb.authStore.isValid && pb.authStore.record) && setAuthStore(pb.authStore)
 
@@ -74,9 +82,9 @@ export default function AccountPage() {
         }
     }
 
-    if (loading) return <Suspense fallback={<Spinner />} />
+    if (loading) return <Spinner />
     if (authStore && authStore.record) {
-        return <Suspense fallback={<Spinner />}>
+        return <>
             <div className="pb-24">
                 <h1 className={title()}>
                     Welcome back{" "}
@@ -98,13 +106,9 @@ export default function AccountPage() {
                     </Link>
                 </div>
             </div>
-        </Suspense>
+        </>
     }
     else {
-        return (
-            <Suspense fallback={<Spinner />}>
-                {renderContent()}
-            </Suspense>
-        )
+        return renderContent()
     }
 }

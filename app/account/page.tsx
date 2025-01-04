@@ -1,7 +1,13 @@
 "use client"
 
+import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
+import { Spinner } from "@nextui-org/react"
 import AccountPage from "./AccountPage"
 
 export default function Page() {
-    return <AccountPage />
+    const searchParams = useSearchParams()
+    return <Suspense fallback={<Spinner />}>
+        <AccountPage searchParams={searchParams} />
+    </Suspense>
 }
