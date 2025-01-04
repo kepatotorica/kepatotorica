@@ -23,12 +23,12 @@ interface Props {
 export const Login = (props: Props) => {
     const [email, setEmail] = useState<string | undefined>()
     const [password, setPassword] = useState<string | undefined>()
-    const [errorMessage, setErrorMessage] = useState<string>("")
+    const [bannerMessage, setBannerMessage] = useState<string>("")
     const [showSpinner, setShowSpinner] = useState<boolean>(false)
 
     const login = async () => {
         if (!password || !email) {
-            setErrorMessage("Missing password or username")
+            setBannerMessage("Error: Missing password or username")
             return
         }
 
@@ -38,29 +38,30 @@ export const Login = (props: Props) => {
             const response = await props.onLogin(email, password)
 
             if (response == LoginResponse.INVALID_CREDENTIALS) {
-                setErrorMessage("Invalid credentials")
+                setBannerMessage("Error: Invalid credentials")
                 console.log("Invalid Credentials")
             } else if (response == LoginResponse.SUCCESS) {
                 console.log("LOGGED IN!")
             }
         } catch (ex: any) {
-            setErrorMessage(`An unknown error occured`)
+            setBannerMessage(`An unknown error occured`)
         }
         setShowSpinner(false)
     }
 
     const forgotPassword = async () => {
+        setBannerMessage(`Sending an email to ${email}`)
         if (email) {
             await props.onForgotPassword(email)
-            console.log("Check your email for instructions to reset your password")
+            setBannerMessage(`An email has been sent to ${email} to reset your password`)
         } else {
-            setErrorMessage("Please enter an email")
+            setBannerMessage("Error: Please enter an email")
         }
     }
 
     return (
         <div className="lg:w-96 w-52">
-            {errorMessage && <Alert color="danger">{errorMessage}</Alert>}
+            {bannerMessage && <Alert color={bannerMessage.startsWith("Error:") ? "danger" : "success"}>{bannerMessage}</Alert>}
             <Input className='py-3' placeholder='email' type="email" onChange={e => setEmail(e.target.value)} />
             <Input className='py-3' placeholder='password' type="password" onChange={e => setPassword(e.target.value)} onKeyUp={e => e.key === "Enter" && login()} />
             <Button className='my-1 w-[100%]' onPress={login}>{showSpinner ? <Spinner /> : "Login"}</Button >

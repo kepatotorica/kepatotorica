@@ -43,11 +43,11 @@ export default function AccountPage() {
     }
 
     const onForgotPassword = async (email: string) => {
-        await pb.collection('users').requestPasswordReset(email, {})
+        await pb.collection('users').requestPasswordReset(email)
     }
 
     const onPasswordReset = async (password: string, confirmPassword: string) => {
-        await pb.collection('users').confirmPasswordReset(
+        return await pb.collection('users').confirmPasswordReset(
             token,
             password,
             confirmPassword,

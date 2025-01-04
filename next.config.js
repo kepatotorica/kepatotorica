@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/auth/:action/:token",
-        destination: "/account?action=:action&token=:token/ballhlahsdlfkasdjf",
+        destination: "/account?action=:action&token=:token",
         permanent: true,
       },
     ];
