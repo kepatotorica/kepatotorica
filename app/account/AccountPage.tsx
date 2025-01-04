@@ -74,9 +74,9 @@ export default function AccountPage() {
         }
     }
 
-    if (loading) return <Spinner />
+    if (loading) return <Suspense fallback={<Spinner />} />
     if (authStore && authStore.record) {
-        return <>
+        return <Suspense fallback={<Spinner />}>
             <div className="pb-24">
                 <h1 className={title()}>
                     Welcome back{" "}
@@ -98,7 +98,7 @@ export default function AccountPage() {
                     </Link>
                 </div>
             </div>
-        </>
+        </Suspense>
     }
     else {
         return (
