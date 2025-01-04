@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { Link } from '@nextui-org/link'
 import { button } from '@nextui-org/theme'
 import { Spinner } from "@nextui-org/spinner"
-import { ReadonlyURLSearchParams } from "next/navigation"
+import { useParams } from "next/navigation"
 import { PasswordReset } from "./auth/PasswordReset"
 import { Login, LoginResponse } from "./auth/Login"
 import { title } from '@/components/primitives'
@@ -15,21 +15,19 @@ import { title } from '@/components/primitives'
 
 const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
-export enum actions {
+enum actions {
     login = 'login',
     confirmPasswordReset = 'confirm-password-reset',
 }
 
 
-interface props {
-    searchParams: ReadonlyURLSearchParams
-}
 
-export default function AccountPage(props: props) {
+export default function AccountPage() {
     const [authStore, setAuthStore] = useState<BaseAuthStore>()
+    const params = useParams<{ action: string; token: string }>()
 
-    const actionParameter = props.searchParams.get('action')?.valueOf() || 'Login'
-    const token = props.searchParams.get('token') || ""
+    const actionParameter = params.action || 'Login'
+    const token = params.token || ""
 
     const getAuth = async () => (pb.authStore.isValid && pb.authStore.record) && setAuthStore(pb.authStore)
 

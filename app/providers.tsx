@@ -27,7 +27,6 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       if (authSplit.length > 1) {
         const pathSegements = authSplit[1].split('/')
         if (pathSegements.length > 2) {
-          debugger
           const newPath = `/account?action=${pathSegements[1]}&token=${pathSegements[2]}`
           router.push(newPath)
         }
