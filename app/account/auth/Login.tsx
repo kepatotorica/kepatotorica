@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/button"
 import { Input } from "@nextui-org/input"
 import { Spinner } from "@nextui-org/spinner"
 import { Alert } from "@nextui-org/alert"
+import { PasswordInput } from "./PasswordInput"
 
 export enum LoginResponse {
     SUCCESS = 'SUCCESS',
@@ -16,8 +17,9 @@ export enum LoginResponse {
 }
 
 interface Props {
-    onLogin: (username: string, password: string) => Promise<LoginResponse>
+    onLogin: (email: string, password: string) => Promise<LoginResponse>
     onForgotPassword: (email: string) => Promise<void>
+    onNavToSignUp: () => void
 }
 
 export const Login = (props: Props) => {
@@ -63,8 +65,9 @@ export const Login = (props: Props) => {
         <div className="lg:w-96 w-52">
             {bannerMessage && <Alert color={bannerMessage.startsWith("Error:") ? "danger" : "success"}>{bannerMessage}</Alert>}
             <Input className='py-3' placeholder='email' type="email" onChange={e => setEmail(e.target.value)} />
-            <Input className='py-3' placeholder='password' type="password" onChange={e => setPassword(e.target.value)} onKeyUp={e => e.key === "Enter" && login()} />
+            <PasswordInput onPasswordChanged={setPassword} onSubmit={login} />
             <Button className='my-1 w-[100%]' onPress={login}>{showSpinner ? <Spinner /> : "Login"}</Button >
+            <Button className='my-1 w-[100%] bg-transparent' onPress={props.onNavToSignUp}>{"Sign Up"}</Button >
             <Button className='my-1 w-[100%] bg-transparent' onPress={forgotPassword}>{"Forgot Password"}</Button >
         </div>
     )

@@ -10,31 +10,31 @@ import { Spinner } from "@nextui-org/spinner"
 import { useParams } from "next/navigation"
 import { PasswordReset } from "./auth/PasswordReset"
 import { Login, LoginResponse } from "./auth/Login"
+import { SignUp } from "./auth/SignUp"
 import { title } from '@/components/primitives'
 
 
 const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
-enum actions {
-    login = 'login',
-    confirmPasswordReset = 'confirm-password-reset',
-}
-
-
+type action = 'login' | 'confirm-password-reset' | 'sign-up'
 
 export default function AccountPage() {
     const [authStore, setAuthStore] = useState<BaseAuthStore>()
+    const [actionParameter, setAction] = useState<action>("login")
+    const [token, setToken] = useState<string>("")
     const params = useParams<{ action: string; token: string }>()
 
-    const actionParameter = params.action || 'Login'
-    const token = params.token || ""
+    useEffect(() => {
+        setAction(params.action as action || 'login')
+        setToken(params.token || "")
+    }, [])
 
     const getAuth = async () => (pb.authStore.isValid && pb.authStore.record) && setAuthStore(pb.authStore)
 
     const [loading, setLoading] = useState<boolean>(true)
 
-    const onLogin = async (username: string, password: string): Promise<LoginResponse> => {
-        const authData = await pb.collection("users").authWithPassword(username, password)
+    const onLogin = async (email: string, password: string): Promise<LoginResponse> => {
+        const authData = await pb.collection("users").authWithPassword(email, password)
 
         if (authData) {
             setAuthStore(pb.authStore)
@@ -46,6 +46,14 @@ export default function AccountPage() {
 
     const onForgotPassword = async (email: string) => {
         await pb.collection('users').requestPasswordReset(email)
+    }
+
+    const onSignUp = async (email: string, password: string, passwordConfirm: string) => {
+        const record = await pb.collection('users').create({ email, password, passwordConfirm })
+        if (record) {
+            onLogin(email, password)
+        }
+        return record
     }
 
     const onPasswordReset = async (password: string, confirmPassword: string) => {
@@ -70,12 +78,22 @@ export default function AccountPage() {
 
     const renderContent = () => {
         switch (actionParameter) {
-            case actions.confirmPasswordReset:
-                return <PasswordReset onPasswordReset={onPasswordReset} />
+            case "confirm-password-reset":
+                return <PasswordReset
+                    onNavToLogin={() => setAction("login")}
+                    onPasswordReset={onPasswordReset}
+                />
+            case "sign-up":
+                return <SignUp
+                    onForgotPassword={onForgotPassword}
+                    onNavToLogIn={() => setAction("login")}
+                    onSignUp={onSignUp}
+                />
             default:
                 return <Login
                     onForgotPassword={onForgotPassword}
                     onLogin={onLogin}
+                    onNavToSignUp={() => setAction("sign-up")}
                 />
         }
     }
