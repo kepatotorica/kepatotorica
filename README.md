@@ -17,5 +17,6 @@ Here are a couple I think could work.
 - Create a better library app. My local library uses an app that is just lifted and copied to many districts. The app is made by a company called Solus UK Ltd, and it is not very good. The searching could be drastically improved. For example, I can't search for Author and a title. The Nintendo Switch is an author, as is the ps5. The result is having to search out side of the app for something you are interested in, then going to the app, and not seeing anything. You also can't search by open holds/avilability and several other things. Granted I don't know what all the software has on the librarians side, which is likely a lot more complex, and important to the library than the user facing app. Still though, similar to Payroll and Education. This seems like an area where the software is old and outdated, but it seems much more approachable that competing with something like ADP or Blackboard.
 
 #Issues with my single env, may be able to do something in the future to help with it:
-To get emails that work properly while developing locally, you may need to change the values here to point at localhost:
+
+To get emails that work properly while developing locally, you may need to change the values here to point at localhost since I don't pay for multiple envs, and the build in email service doesn't have the level of customization needed to handle faking multiple envs through updating the url:
 https://kepatotorica.pockethost.io/_/#/settings
