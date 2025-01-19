@@ -1,8 +1,9 @@
 export interface Contribution {
+  id: string;
   name: string;
   amount: number;
   frequency: ContributionFrequency;
-  type: contributionType;
+  type: ContributionType;
 }
 
 export enum ContributionFrequency {
@@ -14,7 +15,7 @@ export enum ContributionFrequency {
   Annually = "Annually",
 }
 
-export enum contributionType {
+export enum ContributionType {
   CheckIncome = "Check Income",
   OtherIncome = "Other Income",
   PreTaxInvestment = "Pre-Tax",
@@ -28,78 +29,78 @@ export enum contributionType {
 export const contributionToMonthlyAmount = (contribution: Contribution): number => {
   switch (contribution.frequency) {
     case ContributionFrequency.Daily:
-      return contribution.amount * 30; // Assuming 30 days in a month for simplicity
+      return contribution.amount * 30 // Assuming 30 days in a month for simplicity
     case ContributionFrequency.Weekly:
-      return (contribution.amount * 52) / 12;
+      return (contribution.amount * 52) / 12
     case ContributionFrequency.Biweekly:
-      return (contribution.amount * 26) / 12;
+      return (contribution.amount * 26) / 12
     case ContributionFrequency.Monthly:
-      return contribution.amount;
+      return contribution.amount
     case ContributionFrequency.Quarterly:
-      return contribution.amount / 4;
+      return contribution.amount / 4
     case ContributionFrequency.Annually:
-      return contribution.amount / 12;
+      return contribution.amount / 12
     default:
-      return 0;
+      return 0
   }
 }
 
 export const getPostTaxMonthlyIncome = (contributions: Contribution[]): number => {
-  let postTaxIncome = 0;
+  let postTaxIncome = 0
 
   for (let i = 0; i < contributions.length; i++) {
-    let contribution = contributions[i];
+    let contribution = contributions[i]
 
     if (
-      contribution.type === contributionType.CheckIncome || contribution.type === contributionType.OtherIncome
+      contribution.type === ContributionType.CheckIncome || contribution.type === ContributionType.OtherIncome
     ) {
-      postTaxIncome += contributionToMonthlyAmount(contribution);
+      postTaxIncome += contributionToMonthlyAmount(contribution)
     }
   }
 
-  return postTaxIncome;
+  return postTaxIncome
 }
 
 export const getLeftOver = (contributions: Contribution[]): number => {
   let leftoverCash = getPostTaxMonthlyIncome(contributions)
 
   for (let i = 0; i < contributions.length; i++) {
-    let contribution = contributions[i];
-    const monthlyAmount = contributionToMonthlyAmount(contribution);
+    let contribution = contributions[i]
+    const monthlyAmount = contributionToMonthlyAmount(contribution)
 
     switch (contribution.type) {
-      case contributionType.Bill:
-      case contributionType.PostTaxInvestment:
-      case contributionType.Housing:
-      case contributionType.Food:
-        leftoverCash -= monthlyAmount;
+      case ContributionType.Bill:
+      case ContributionType.PostTaxInvestment:
+      case ContributionType.Housing:
+      case ContributionType.Food:
+        leftoverCash -= monthlyAmount
       default:
         break
     }
   }
 
-  return leftoverCash;
+  return leftoverCash
 }
 
 export const getMonthlyInvested = (contributions: Contribution[]): number => {
-  let investedMoney = 0;
+  let investedMoney = 0
 
   for (let i = 0; i < contributions.length; i++) {
-    let contribution = contributions[i];
-    const monthlyAmount = contributionToMonthlyAmount(contribution);
+    let contribution = contributions[i]
+    const monthlyAmount = contributionToMonthlyAmount(contribution)
 
     switch (contribution.type) {
-      case contributionType.EmployeeStock:
-      case contributionType.PostTaxInvestment:
-      case contributionType.PreTaxInvestment:
-        investedMoney += monthlyAmount; // Investments are added to the invested money
-        break;
+      case ContributionType.EmployeeStock:
+      case ContributionType.PostTaxInvestment:
+      case ContributionType.PreTaxInvestment:
+        investedMoney += monthlyAmount // Investments are added to the invested money
+        break
       default:
-        break; // Non-investment contributions don't affect this
+        break // Non-investment contributions don't affect this
     }
   }
 
-  return investedMoney;
+  return investedMoney
 }
 
 export const formatMoney = (amount: number) => {
@@ -108,5 +109,5 @@ export const formatMoney = (amount: number) => {
       currency: 'USD',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
-  }).format(amount);
-};
+  }).format(amount)
+}

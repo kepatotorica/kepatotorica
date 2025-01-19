@@ -8,36 +8,38 @@ import PocketBase, { BaseAuthStore } from "pocketbase"
 import { Contribution } from "./Contribution"
 import ContributionTable from "./ContributionTable"
 import ContributionEditor from "./ContributionEditor"
-import { fakeContributions } from "./FakeContributions"
 import { ContributionSummary } from "./ContributionSummary"
+import { deleteContribution, getContributions, postContribution } from "./Requests"
 const pb = new PocketBase('https://kepatotorica.pockethost.io/')
 
 export default function RetirementCalculatorPage() {
   const [authStore, setAuthStore] = useState<BaseAuthStore>()
+  const [contributions, setContributions] = useState<Contribution[]>([])
   const getAuth = async () => pb.authStore.isValid && pb.authStore.record && setAuthStore(pb.authStore)
+
+  const buildContributions = async () => {
+    setContributions(await getContributions(pb))
+  }
+
   useEffect(() => {
     getAuth()
   }, [])
 
-
-  const [contributions, setContributions] = useState<Contribution[]>([])
-
   useEffect(() => {
-    if (authStore?.record?.email === "kepatoto@gmail.com") {
-      const ourContributions = fakeContributions
-        .map(contribution => {
-          return {
-            ...contribution,
-            amount: Math.round(contribution.amount)
-          }
-        })
-
-      setContributions(ourContributions)
-    }
+    buildContributions()
   }, [authStore])
 
-  const addContribution = (contribution: Contribution) => setContributions(prevContributions => [...prevContributions, contribution])
-  const removePlan = (index: number) => setContributions(contributions.filter((_, i) => i !== index))
+  const addContribution = async (contribution: Contribution) => {
+    const contributionWithId = await postContribution(pb, contribution)
+    if (contributionWithId) {
+      setContributions(prevContributions => [...prevContributions, contributionWithId])
+    }
+  }
+
+  const removeContribution = async (index: number) => {
+    await deleteContribution(pb, contributions[index])
+    setContributions(contributions.filter((_, i) => i !== index))
+  }
 
   return <>
     <div className="pb-8 text-center justify-center">
@@ -61,7 +63,7 @@ export default function RetirementCalculatorPage() {
     <ContributionEditor onAdd={addContribution} />
     <ContributionTable
       className="text-orange-400"
-      contributions={contributions} onRemove={removePlan}
+      contributions={contributions} onRemove={removeContribution}
     />
     <ContributionSummary contributions={contributions} />
     <Spacer y={96} />

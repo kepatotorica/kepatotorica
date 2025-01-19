@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import {
     Card,
     CardHeader,
@@ -9,35 +9,36 @@ import {
     Spacer,
     Select,
     SelectItem,
-} from '@nextui-org/react';
+} from '@nextui-org/react'
 
-import { ContributionFrequency, contributionType, Contribution } from './Contribution';
+import { ContributionFrequency, ContributionType, Contribution } from './Contribution'
 
 interface Props {
-    onAdd: (contribution: Contribution) => void;
+    onAdd: (contribution: Contribution) => Promise<void>;
 }
 
 const defaultPlan = {
-    name: "Robinhood",
-    amount: 100,
+    id: "",
+    name: "Paycheck",
+    amount: 1000,
     frequency: ContributionFrequency.Biweekly,
-    type: contributionType.PostTaxInvestment
+    type: ContributionType.CheckIncome
 }
 
 const ContributionEditor: React.FC<Props> = (props: Props) => {
-    const [newContribution, setNewContribution] = useState<Contribution>({ ...defaultPlan });
+    const [newContribution, setNewContribution] = useState<Contribution>({ ...defaultPlan })
 
     const setPropertyOnState = (propertyToUpdate: string, value: string) => {
         setNewContribution({
             ...newContribution,
-            [propertyToUpdate]: parseFloat(value),
-        });
-    };
+            [propertyToUpdate]: propertyToUpdate === "amount" ? parseFloat(value) : value,
+        })
+    }
 
     const addPlan = () => {
-        props.onAdd(newContribution);
-        setNewContribution({ ...defaultPlan });
-    };
+        props.onAdd(newContribution)
+        setNewContribution({ ...defaultPlan })
+    }
 
     return (
         <Card>
@@ -63,6 +64,7 @@ const ContributionEditor: React.FC<Props> = (props: Props) => {
                 <Spacer y={1} />
                 <Select
                     required
+                    defaultSelectedKeys={[ContributionFrequency.Biweekly]}
                     label="Contribution Frequency"
                     placeholder="Select a frequency"
                     onChange={(e) => setPropertyOnState("frequency", e.target.value)}
@@ -74,6 +76,19 @@ const ContributionEditor: React.FC<Props> = (props: Props) => {
                     ))}
                 </Select>
                 <Spacer y={1} />
+                <Select
+                    required
+                    defaultSelectedKeys={[ContributionType.CheckIncome]}
+                    label="Type"
+                    placeholder="Select a type"
+                    onChange={(e) => setPropertyOnState("type", e.target.value)}
+                >
+                    {Object.values(ContributionType).map((type) => (
+                        <SelectItem key={type} value={type} >
+                            {type}
+                        </SelectItem>
+                    ))}
+                </Select>
             </CardBody>
             <CardFooter>
                 <Button color="primary" onPress={addPlan}>
@@ -81,7 +96,7 @@ const ContributionEditor: React.FC<Props> = (props: Props) => {
                 </Button>
             </CardFooter>
         </Card>
-    );
-};
+    )
+}
 
-export default ContributionEditor;
+export default ContributionEditor
