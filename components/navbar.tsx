@@ -58,7 +58,7 @@ export const Navbar = () => {
         <Link aria-label="Account" href={"/account"}>
           <UserIcon className="text-default-500" />
         </Link>
-        <NavbarMenuToggle onClick={(_) => setIsMenuOpen(!isMenuOpen)} />
+        <NavbarMenuToggle onPress={() => setIsMenuOpen(!isMenuOpen)} />
       </NavbarContent>
 
       <NavbarMenu>
