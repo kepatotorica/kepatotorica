@@ -1,0 +1,16 @@
+* What is the local developer environement like? (Set up, Testing, debugging)
+* What is it like to be on call?
+* How are internal docuements?
+* What is your weekly cadence like in terms of meetings and team dynamics?
+* Size of team
+
+
+
+
+
+
+CDI
+
+user creates a conversion, it is written to mongo
+Upon creating a conversion, the user has to upload a file (this goes to the file access API, which does virus scans and publishes an event), we subscribe to that event, pull the file, and transform it to jsonl
+Upon transformation we publish a message to a queue that has fannout enabled, we then kick off several lambdas that do validation, and parse out important information from the files that will be used later

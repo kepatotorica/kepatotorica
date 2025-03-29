@@ -1,0 +1,81 @@
+Viktor -> Director
+6 years at Outsystems
+Lead mobile value stream
+
+
+
+* What does an average team look like in terms of it's composition?
+        - EM, PO, SE (there is a quality practice)
+            - Architect (2 in mobile)
+                - High level solution designs
+    * Will the whole team be remote?
+        - Yes, Portugal and USA
+    * What is it like to be on call?
+        - You will be on call based on timezone
+    * Primary mode of communication? (slack, calls, jira comments, email?)
+        - async, meetings in the morning for the USA.
+    * Do you have team bonding activities?
+        - up to the manager
+        - Onsites 2 a year, One in Lisbon, Bragga
+    * How do you handle releases from a high level? Do you follow full CICD principals to have everything hands off (unless there is some sort of failure?)
+        - ODC, we have a platform engineering team that provides CICD tools
+            -Deployment units, you define microserveses, and deploy them to envs.
+                -ring 0, similar to corp
+                -ring 1, EA
+                -ring GA,
+    * What are the expecations for this role during day to day operations?
+        - Two options
+            - Ben's team
+                - Mobile with a compiler, working with the native run time, and the mobile compiler
+                - Transform the workflow code into a defined mobile project that will build the native application
+                    - Crash handling etc
+                    - Kotlin/Java for android, new in Kotlin, old in Java
+                    - Objective-C for old, Swift for new stuff
+            - Back end CICD
+                - That code has been generated, take the code and build the project generate the bianaries, and deploy/have logs
+
+
+
+
+* What is your companies/teams approach to the SDLC (software development life cycle)?
+    * Do you follow scrum, kanban? What tools are used to align product and development?
+        - Scrum
+    * How does your organization, or this team view meetings. Do you try to strip them down so you only have those that are nessisary.
+        - Dailies, refinements, retro, DSU, allhands etc, optional all hands
+    * Who drives product decisions?
+        - Product Managers. Product Owners cross team.
+    * If two devs are deadlocked and won't budge, how does your team handle those disagreements?
+        -
+
+
+* How would you rate your work life balance?
+        - Now it is good, was hard when taking on the brunt of the work.
+    * How does the team treat taking time off in the middle of the day (for something like an appointment), without explicity requesting PTO?
+        - Very flexible
+    * How do review cycles work?
+        - Annually, beginning of the year
+        - Quarterly for goals and how the person can grow to achive more
+    * Do you have Sevrice Level Agreements and Service Level Objectives?
+        -
+    * Do you use an APM software such as DataDog
+        - We use promethus for the front end, observability is internal only
+            - have acces to a tool called portal and it monitors clients so we can watch what is important
+
+
+* As an empolyee of a private company, are you privy to any documents that shed light on the finacial health of the organization?
+    - You have access to the finacials
+    * Has you company recently recieved any funding?
+        - back in 2022
+    * Has your company recently had any layoffs?
+        - Yes, last year, grew to much in the pandemic. Small percent, they have systems to prevent overhiring
+
+
+* Semitechnical
+    * How many different softwares/languages will have to be handled in my day to day? (probably a more technical question)
+        -
+
+
+* Next steps
+    - Two technical
+        - 1: Architectural
+        - 2:
