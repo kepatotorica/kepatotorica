@@ -1,68 +1,68 @@
 describe("testing myAtoi", () => {
   //Basic parsing
   test("checks negativity", () => {
-    expect(template("-1")).toBe(-1)
+    expect(myAtoi("-1")).toBe(-1)
   })
 
   test("positive is allowed", () => {
-    expect(template("+1")).toBe(1)
+    expect(myAtoi("+1")).toBe(1)
   })
 
   test("checks positivity", () => {
-    expect(template("1")).toBe(1)
+    expect(myAtoi("1")).toBe(1)
   })
 
   test("ignores leading spaces", () => {
-    expect(template("   1")).toBe(1)
+    expect(myAtoi("   1")).toBe(1)
   })
 
   test("works with longer numbers", () => {
-    expect(template("12345")).toBe(12345)
+    expect(myAtoi("12345")).toBe(12345)
   })
 
   test("Works with intermixed characters", () => {
-    expect(template("123C45")).toBe(123)
+    expect(myAtoi("123C45")).toBe(123)
   })
 
   //Edge cases
   test("handles negative string only", () => {
-    expect(template("-")).toBe(0)
+    expect(myAtoi("-")).toBe(0)
   })
 
   test("handles empty string", () => {
-    expect(template("")).toBe(0)
+    expect(myAtoi("")).toBe(0)
   })
 
   test("handles empty string with spaces", () => {
-    expect(template("    ")).toBe(0)
+    expect(myAtoi("    ")).toBe(0)
   })
 
   test("handles text only", () => {
-    expect(template("asjkdhf aposheflkaj ndf")).toBe(0)
+    expect(myAtoi("asjkdhf aposheflkaj ndf")).toBe(0)
   })
 
   test("rounds to largest positive number", () => {
-    expect(template("21474836471")).toBe(2147483647)
+    expect(myAtoi("21474836471")).toBe(2147483647)
   })
 
   test("rounds to largest negative number", () => {
-    expect(template("-21474836471")).toBe(-2147483648)
+    expect(myAtoi("-21474836471")).toBe(-2147483648)
   })
 
   test("handles multiple plus signs", () => {
-    expect(template("++123")).toBe(0)
+    expect(myAtoi("++123")).toBe(0)
   })
 
   test("handles mixed signs", () => {
-    expect(template("-+123")).toBe(0)
+    expect(myAtoi("-+123")).toBe(0)
   })
 
   test("handles -+", () => {
-    expect(template("-+")).toBe(0)
+    expect(myAtoi("-+")).toBe(0)
   })
 
   test("handles +-", () => {
-    expect(template("+-")).toBe(0)
+    expect(myAtoi("+-")).toBe(0)
   })
 })
 
@@ -77,7 +77,7 @@ describe("testing myAtoi", () => {
 //     Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. If no digits were read, then the result is 0.
 //     Rounding: If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then round the integer to remain in the range. Specifically, integers less than -231 should be rounded to -231, and integers greater than 231 - 1 should be rounded to 231 - 1.
 
-function template(s: string): number {
+function myAtoi(s: string): number {
   s = s.trim()
   if (s.length == 0) return 0
 

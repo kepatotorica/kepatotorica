@@ -6,7 +6,6 @@
     "source.fixAll.prettier": "explicit"
   },
   "tws.trimOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.semi": true,
   "prettier.singleQuote": false,
 }

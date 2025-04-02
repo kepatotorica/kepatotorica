@@ -1,9 +1,12 @@
-describe("testing template", () => {
-  test("case 1", () => {
-    expect(template("-1")).toBe("-1")
+
+describe("testing TODOASDF", () => {
+  var testCount = 1
+
+  test(`case ${testCount++}`, () => {
+    expect(TODOASDF("-1")).toBe("-1")
   })
 })
 
-function template(s: string): string {
+function TODOASDF(s: string): string {
   return s
 }
