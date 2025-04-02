@@ -1,6 +1,6 @@
 * What is the local developer environement like? (Set up, Testing, debugging)
 * What is it like to be on call?
-* How are internal docuements?
+* How is docuemntation done for local projects?
 * What is your weekly cadence like in terms of meetings and team dynamics?
 * Size of team
 
