@@ -83,8 +83,7 @@ class WordleGuesser extends React.Component<any, MyState> {
         }
       })
     })
-
-    debugger
+    
     this.setState({ wordList: calculatedWordList })
   }
 
