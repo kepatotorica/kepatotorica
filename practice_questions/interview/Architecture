@@ -1,0 +1,14 @@
+Get requirements
+-functional
+-non functional
+
+
+API
+- Concurrency (load balance with multiple servers? Horizontally scale)
+DB
+- Relational or Docuemnt?
+- Single/multitenant
+Client
+-
+Monitoring - Add DD for alerts and logs
+Reliability - Retries? API gateway route to a different server if load balancing?
