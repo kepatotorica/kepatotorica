@@ -38,7 +38,7 @@ export default function RomsPage() {
 
 
   const downloadRom = async (title: string, gameSystem: string) => {
-    const url = `https://myrient.erista.me/files/Redump/${gameSystem}/${title}.zip`;
+    const url = `https://myrient.erista.me/files/Redump/${gameSystem}/${title}`;
 
     try {
       const response = await fetch(url, {
@@ -52,12 +52,13 @@ export default function RomsPage() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+      debugger;
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(blob);
 
       const link = document.createElement('a');
       link.href = blobUrl;
-      link.download = `${title}.zip`;
+      link.download = `${title}`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
