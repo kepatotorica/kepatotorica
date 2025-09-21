@@ -36,9 +36,42 @@ export default function RomsPage() {
     open(`https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/?filter=${title.replaceAll(" ", "+")}`)
   }
 
+
+  const downloadRom = async (title: string, gameSystem: string) => {
+    const url = `https://myrient.erista.me/files/Redump/${gameSystem}/${title}.zip`;
+
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'Referer': "https://kepatotorica.vip",
+          'Access-Control-Allow-Origin': "*"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `${title}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
+  };
+
   return (
     <div>
       <div className='text-2xl p-10 text-center'>
+        {/* https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/God%20of%20War%20%28USA%29.zip */}
         Search for <span className={"text-orange-400"}>roms</span>  here, roms provided by <Link className={"text-orange-400"} href={"https://myrient.erista.me/donate/"}>Myrient</Link>
       </div>
 
@@ -79,7 +112,10 @@ export default function RomsPage() {
                         </thead>
                         <tbody>
                             {matches.map((match, index) => (
-                                <tr key={index} className={theme === "dark" ? "hover:bg-blue-500" : "hover:bg-blue-200"} onClick={_ => navigateToRom(match.title)}>
+                                <tr key={index} className={theme === "dark" ? "hover:bg-blue-500" : "hover:bg-blue-200"} onClick={_ => {
+                                  downloadRom(match.title, "Sony - PlayStation 2")
+                                  // navigateToRom(match.title)
+                                  }}>
                                     <td className="">{match.title}</td>
                                     <td className="">{match.size}</td>
                                 </tr>
