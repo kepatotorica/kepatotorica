@@ -36,13 +36,9 @@ export default function RomsPage() {
     open(`https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/?filter=${title.replaceAll(" ", "+")}`)
   }
 
-
   const downloadRom = async (title: string, gameSystem: string) => {
-    const url = encodeURI(`https://myrient.erista.me/files/Redump/${gameSystem}/${title}`);
+    const url = encodeURI(`https://myrient.erista.me/files/Redump/${gameSystem}/${title}`).replace('(', '%28').replace(')', '%29');
 
-    const TODOASDFURLCHECK = url == "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/007%20-%20Agent%20Under%20Fire%20%28USA%29.zip"
-
-    debugger;
     try {
       const response = await fetch(url, {
         headers: {
@@ -55,7 +51,6 @@ export default function RomsPage() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      debugger;
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(blob);
 
