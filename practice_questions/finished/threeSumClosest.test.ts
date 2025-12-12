@@ -87,7 +87,6 @@ function threeSumClosest(nums: number[], target: number): number {
     for (let ri = listLength - 1; ri > li + 1; ri--) {
       let rv = sortedList[ri]
       if (lv == 9 && rv == 42) {
-        debugger
       }
       let idealNumber = target - lv - rv
       let closestMV = getClosest(nums, li + 1, ri - 1, idealNumber)

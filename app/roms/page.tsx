@@ -29,11 +29,12 @@ export default function RomsPage() {
 
   useEffect(() => {
     console.log("Debounced search changed: " + debouncedSearch)
-    setMatches(PlayStationTwoGames.filter(game => game.title.replaceAll(" ", "").includes(debouncedSearch.replaceAll(" ", ""))))
+    var debouncedSearchLower = debouncedSearch.toLocaleLowerCase();
+    setMatches(PlayStationTwoGames.filter(game => game.title.toLocaleLowerCase().replaceAll(" ", "").includes(debouncedSearchLower.replaceAll(" ", ""))))
   }, [debouncedSearch])
 
   const navigateToRom = (title: string) => {
-    open(`https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/?filter=${title.replaceAll(" ", "+")}`)
+    open(`https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/?filter=${title.replaceAll(".zip", "")}`)
   }
 
   const downloadRom = async (title: string, gameSystem: string) => {
@@ -112,8 +113,8 @@ export default function RomsPage() {
                         <tbody>
                             {matches.map((match, index) => (
                                 <tr key={index} className={theme === "dark" ? "hover:bg-blue-500" : "hover:bg-blue-200"} onClick={_ => {
-                                  downloadRom(match.title, "Sony - PlayStation 2")
-                                  // navigateToRom(match.title)
+                                  // downloadRom(match.title, "Sony - PlayStation 2")
+                                  navigateToRom(match.title)
                                   }}>
                                     <td className="">{match.title}</td>
                                     <td className="">{match.size}</td>

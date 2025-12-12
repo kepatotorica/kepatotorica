@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { Link } from '@nextui-org/link'
 import { button } from '@nextui-org/theme'
 import { Spinner } from "@nextui-org/spinner"
-import { useParams } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { PasswordReset } from "./auth/PasswordReset"
 import { Login, LoginResponse } from "./auth/Login"
 import { SignUp } from "./auth/SignUp"
@@ -23,6 +23,8 @@ export default function AccountPage() {
     const [actionParameter, setAction] = useState<action>("login")
     const [token, setToken] = useState<string>("")
     const params = useParams<{ action: string; token: string }>()
+        const router = useRouter()
+    const searchParams = useSearchParams()
 
     useEffect(() => {
         setAction(params.action as action || 'login')
@@ -74,6 +76,16 @@ export default function AccountPage() {
         getAuth()
         setLoading(false)
     }, [])
+
+    useEffect(() => {
+        if (authStore && authStore.record) {
+            const routeParam = searchParams?.get('route')
+            if (routeParam) {
+                const target = routeParam.startsWith('/') ? routeParam : `/${routeParam}`
+                router.replace(target)
+            }
+        }
+    }, [authStore, searchParams, router])
 
 
     const renderContent = () => {

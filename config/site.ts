@@ -24,6 +24,11 @@ export const siteConfig = {
       label: "Roms",
       href: "/roms",
     }
+    ,
+    {
+      label: "Workout",
+      href: "/workoutTracker",
+    }
   ],
   links: {
     github: "https://github.com/kepatotorica",
