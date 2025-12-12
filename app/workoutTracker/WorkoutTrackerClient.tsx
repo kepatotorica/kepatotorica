@@ -32,7 +32,6 @@ export default function WorkoutTrackerClient() {
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    // Helper: wait until PocketBase auth is restored/valid (so getWorkoutData doesn't return [])
     const waitForAuthValid = async (timeout = 5000) => {
       if (!pb) return false
       if (pb.authStore && pb.authStore.isValid) return true
@@ -57,6 +56,7 @@ export default function WorkoutTrackerClient() {
     const load = async () => {
       try {
         await waitForAuthValid(3000)
+        debugger;
         const data = await getWorkoutData(pb as any)
         setWorkoutData(data)
         if (!mounted) return
@@ -121,7 +121,13 @@ export default function WorkoutTrackerClient() {
                 try {
                   const params = new URLSearchParams(searchParams?.toString() || '')
                   params.set('active', workout)
-                  router.replace(`${pathname}?${params.toString()}`)
+                  const newUrl = `${pathname}?${params.toString()}`
+                  // update URL without triggering a navigation/reload
+                  if (typeof window !== 'undefined' && window.history && window.history.replaceState) {
+                    window.history.replaceState({}, '', newUrl)
+                  } else {
+                    router.replace(newUrl)
+                  }
                 } catch (e) {
                   // fallback: do nothing
                 }
